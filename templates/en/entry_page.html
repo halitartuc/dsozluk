@@ -1,0 +1,25 @@
+{% include 'tr/../base.html' %}
+<head>
+    <title>{{ entry.title }} - {{ entry }} - sözlük</title>
+</head>
+<body>
+<div class="anasayfa">
+    <div class="baslik-box">
+        <h1 style="color: #4d90fe"><a href="/baslik/{{ entry.title }}">{{ entry.title }}</a></h1>
+    </div>
+    <small style="color: #aaaaaa">{{ entry }}</small>
+    <div class="entry">
+        <p style="margin-top: 5px">{{ entry.entry }}</p>
+        <div class="entry-ozellikler">
+            <a style="color: #aaaaaa; font-size: small" href="/entry/{{ entry.id }}"><small style="margin-right: 10px">
+                {% if entry.pub_date.date == entry.last_edited.date and entry.pub_date.hour == entry.last_edited.hour and entry.pub_date.minute == entry.last_edited.minute and entry.pub_date.second == entry.last_edited.second %}
+                    {{ entry.pub_date }}
+                {% else %}
+                    {{ entry.pub_date }} ~ {{ entry.last_edited }}
+                {% endif %}
+            </small></a>
+            <div class="yazar-box">{{ entry.author }}</div>
+        </div>
+    </div>
+</div>
+</body>

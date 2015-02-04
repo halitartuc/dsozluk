@@ -1,0 +1,244 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
+
+
+body {
+    font-family: 'Open Sans Condensed', sans-serif;
+    background-color: #cbcbcb;
+}
+
+.bar {
+    height: 75px;
+    background-color: #131313;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.bar .logo {
+    color: white;
+    margin: 0 25px 0 25px;
+}
+
+.sol-stream {
+    position: fixed;
+    width: 200px;
+    margin-left: 35px;
+    top: 80px;
+}
+
+.sag {
+    position: fixed;
+    margin-right: 35px;
+    top: 80px;
+    right: 0;
+}
+
+.search-box {
+    font-size: 0;
+    margin: 25px 0 25px 0;
+}
+
+.box {
+    height: 25px;
+}
+
+a:-webkit-any-link {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.submit-button {
+    border: 0;
+    background-color: #4d90fe;
+    border-radius: 2px;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px 5px 10px;
+}
+
+.yenile-button {
+    line-height: 20px;
+    right: 0;
+    text-align: center;
+    border: 1px solid #aaaaaa;
+}
+
+.small {
+    color: #828282;
+}
+
+.feed {
+    width: 100%;
+    margin: -1px 0 0 0;
+    border-top: 1px solid #aaaaaa;
+    border-bottom: 1px solid #aaaaaa;
+    line-height: 25px;
+}
+
+.rss {
+    font-size: small;
+}
+.ust {
+    width: 100%;
+    margin: -1px 0 0 0;
+    border-bottom: 1px solid #aaaaaa;
+    line-height: 25px;
+}
+
+.alt {
+    width: 100%;
+    margin: -1px 0 0 0;
+    border-top: 1px solid #aaaaaa;
+    line-height: 25px;
+}
+
+.feed:hover, .ust:hover, .alt:hover, .yenile-button:hover {
+    background-color: #aaaaaa;
+}
+
+.anasayfa {
+    position: absolute;
+    left: 270px;
+    right: 330px;
+    top: 75px;
+}
+
+#id_entry {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.entry {
+    border-top: 1px solid #aaaaaa;
+}
+
+.entry p {
+    word-break: break-all;
+}
+
+.entry-ozellikler {
+    margin-bottom: 10px;
+}
+
+.left {
+    float: left;
+    text-align: left;
+}
+
+.left .downvote {
+    margin-right: 5px;
+}
+
+.left .downvote:hover, .left .upvote:hover {
+    cursor: pointer;
+}
+
+.entry-ozellikler .right {
+    text-align: right;
+}
+
+.entry .vote {
+    display: inline-block;
+    text-align: left;
+}
+
+.entry .selected {
+    color: #4d90fe;
+    font-weight: bold;
+}
+
+.entry .red {
+    color: red;
+}
+
+.pages {
+    text-align: right;
+    font-size: small;
+}
+
+.yazar-box {
+    color: #4d90fe;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.member-box {
+    color: white;
+    margin: 10px 30px 30px 0;
+    position: fixed;
+    right: 10px;
+}
+.member-box .box {
+    margin: 0 5px 0 5px;
+}
+
+.member-box .username {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-right: -35px;
+    margin-top: 22px;
+    color: rgba(255, 255, 255, 0.09);
+    font-size: xx-large;
+}
+
+.errorlist {
+    list-style-type: none;
+    font-size: small;
+    color: red;
+}
+
+.titles {
+    color: #4d90fe;
+}
+
+.profile {
+    margin-top: 10px;
+}
+
+.profile .info {
+
+}
+
+.profile .info p {
+    display: inline;
+    margin: 0 3px 0 3px;
+}
+
+blockquote {
+    position: relative;
+    padding: 30px 120px;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+}
+
+blockquote:before, blockquote:after {
+    position: absolute;
+    height: 60px;
+    font-size: 120px;
+    line-height: 1;
+    font-family: Helvetica;
+}
+
+blockquote:before {
+    top: 0;
+    left: 0;
+    content: "\201C";
+    padding-left: 10px;
+}
+
+blockquote:after {
+    bottom: 0;
+    right: 0;
+    content: "\201D";
+    padding-right: 10px;
+}
+
+blockquote:hover {
+    color: #4d90fe;
+    transition: 0.3s;
+}

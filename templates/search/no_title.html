@@ -1,0 +1,17 @@
+{% include 'tr/../base.html' %}
+<title>{{ title }} - sözlük</title>
+<div class="anasayfa">
+    <p>ajanlarımız bu başlığa bir entry girilmediğini tespit etti.</p>
+    {% if user.is_authenticated %}
+        <p><strong>{{ title }}</strong> adlı başlığa entry giriyorsun:</p>
+        <form method="post" action="">
+            {% csrf_token %}
+            {% for hidden in form.form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {# Include the visible fields #}
+            <p>{{ form.form.entry }}</p>
+            <input class="submit-button" type="submit" value="gönder">
+        </form>
+    {% endif %}
+</div>

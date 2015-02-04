@@ -1,0 +1,9 @@
+<link rel="stylesheet" type="text/css" href="/media/templates/css/base.css"/>
+<div class="rss">
+    <a href=""><div class="yenile-button">yenile ↻</div></a>
+    <a target="_parent" href="{{ first.link }}"><div class="ust">{{ first.title }}<small>({{ first.description }})</small></div></a>
+    {% for entry in feeds %}
+        <a target="_parent" href="{{ entry.link }}"><div class="feed">{{ entry.title }}<small>({{ entry.description }})</small></div></a>
+    {% endfor %}
+    <a target="_parent" href="{{ last.link }}"><div class="alt">{{ last.title }}<small>({{ last.description }})</small></div></a>
+</div>

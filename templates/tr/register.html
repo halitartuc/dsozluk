@@ -1,0 +1,24 @@
+{% include 'tr/base.html' %}
+<div class="anasayfa">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.form.non_field_errors }}
+        <p>
+            <label for="{{ form.form.username.id_for_label }}"><small>kullanıcı adı</small></label><br>
+            {{ form.form.username }}{{ form.form.username.errors }}
+        </p>
+        <p>
+            <label for="{{ form.form.email.id_for_label }}"><small>e-posta adresi</small></label><br>
+            {{ form.form.email }}{{ form.form.email.errors }}
+        </p>
+        <p>
+            <label for="{{ form.form.password1.id_for_label }}"><small>şifre</small></label><br>
+            {{ form.form.password1 }}{{ form.form.password1.errors }}
+        </p>
+        <p>
+            <label for="{{ form.form.password2.id_for_label }}"><small>şifre onayı</small></label><br>
+            {{ form.form.password2 }}{{ form.form.password2.errors }}
+        </p>
+        <input class="submit-button" type="submit" value="kayıt ol" />
+    </form>
+</div>

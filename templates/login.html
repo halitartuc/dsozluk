@@ -1,0 +1,21 @@
+{% include 'base.html' %}
+<div class="anasayfa">
+    <p>
+        <form action="auth" method="post">
+            {% csrf_token %}
+            <p>
+                <label for="username"><small>kullanıcı adı</small></label><br>
+                <input type="text" name="username" id="username">
+            </p>
+            <p>
+                <label for="password"><small>şifre</small></label><br>
+                <input type="password" name="password" id="password"><br>
+                <input type="checkbox" id="remember_me" name="_remember_me"/>
+                <label for="remember_me"><small>beni hatırla</small></label>
+            </p>
+            <input class="submit-button" type="submit" value="giriş yap"/>
+        </form>
+
+
+    </p>
+</div>

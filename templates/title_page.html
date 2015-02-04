@@ -1,0 +1,143 @@
+{% include "base.html" %}
+<head>
+    <title>{{ title }} - sözlük</title>
+</head>
+<body>
+    <div class="anasayfa">
+    <div class="baslik-box">
+        <h1 class="titles">{{ title }}</h1>
+        <div class="pages">
+            {% if current_page.has_previous and current_page.has_next %}
+                <a style="color: white" class="submit-button" href="?p={{ current_page.previous_page_number }}">önceki</a>
+                <select style="height: 28px" onchange="if (this.value) window.location.href='?p='+this.value">
+                    {% for num in pages.page_range %}
+                        {% if num|upper == page_num|upper %}
+                            <option selected>{{ num }}</option>
+                        {% else %}
+                            <option>{{ num }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                /
+                <a style="color: white" title="son sayfa" class="submit-button" href="?p={{ pages.num_pages }}">{{ pages.num_pages }}</a>
+                <a style="color: white" class="submit-button" href="?p={{ current_page.next_page_number }}">sonraki</a>
+            {% elif current_page.has_previous %}
+                <a style="color: white" class="submit-button" href="?p={{ current_page.previous_page_number }}">önceki</a>
+                <select style="height: 28px" onchange="if (this.value) window.location.href='?p='+this.value">
+                    {% for num in pages.page_range %}
+                        {% if num|upper == page_num|upper %}
+                            <option selected>{{ num }}</option>
+                        {% else %}
+                            <option>{{ num }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                /
+                <a style="color: white" title="son sayfa" class="submit-button" href="?p={{ pages.num_pages }}">{{ pages.num_pages }}</a>
+            {% elif current_page.has_next %}
+                <select style="height: 28px" onchange="if (this.value) window.location.href='?p='+this.value">
+                    {% for num in pages.page_range %}
+                        {% if num|upper == sayfa_num|upper %}
+                            <option selected>{{ num }}</option>
+                        {% else %}
+                            <option>{{ num }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                /
+                <a style="color: white" title="son sayfa" class="submit-button" href="?p={{ pages.num_pages }}">{{ pages.num_pages }}</a>
+                <a style="color: white" class="submit-button" href="?p={{ current_page.next_page_number }}">sonraki</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="entryler">
+        {% for entry in entries %}
+            <small class="small">{{ entry }}</small>
+            <div class="entry">
+                <p style="margin-top: 5px">{{ entry.entry }}</p>
+                <div class="entry-ozellikler">
+                    {% if user.is_authenticated  %}<small><div class="left" style="display: inline-flex">
+                        <div id="{{ entry.id }}" class="downvote{% for i in entry.downVotes.all %}{% if i == user %} selected red{% endif %}{% endfor %}">
+                            -{{ entry.count_down_votes }}
+                        </div>
+                        <div id="{{ entry.id }}" class="upvote{% for i in entry.upVotes.all %}{% if i == user %} selected{% endif %}{% endfor %}">
+                            +{{ entry.count_up_votes }}
+                        </div>
+                    </div></small>{% endif %}
+                    <div class="right">
+                        <a style="font-size: small" href="/entry/{{ entry.id }}"><small class="small" style="margin-right: 10px">
+                            {% if entry.pub_date.date == entry.last_edited.date and entry.pub_date.hour == entry.last_edited.hour and entry.pub_date.minute == entry.last_edited.minute and entry.pub_date.second == entry.last_edited.second %}
+                                {{ entry.pub_date }}
+                            {% else %}
+                                {{ entry.pub_date }} ~ {{ entry.last_edited }}
+                            {% endif %}
+                        </small></a>
+                        <div class="yazar-box"><a href="/kullanici/{{ entry.author }}">{{ entry.author }}</a></div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% if user.is_authenticated %}
+        <p><strong>{{ title }}</strong> adlı başlığa entry giriyorsun:</p>
+        <form method="post" action="">
+            {% csrf_token %}
+            {% for hidden in form.form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {# Include the visible fields #}
+            <p>{{ form.form.entry }}</p>
+            <input class="submit-button" type="submit" value="gönder">
+        </form>
+    {% endif %}
+    </div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+    $(".upvote, .downvote").click(function() {
+        var entry_id = $(this).attr('id');
+        var entry = $(this);
+        var vote_type = $(this).attr('class');
+
+        if (entry.hasClass('selected')){
+            <!--oyu geri alma işlemi-->
+            $.post('http://localhost:8000/ajax/',{
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                entry_id:entry_id,
+                vote_action: 'return',
+                vote_type: vote_type
+                    },
+                    function(data){
+                        if (data != "his entry"){
+                            entry.removeClass('selected');
+                            if(vote_type=='downvote selected red'){
+                                entry.removeClass('red')
+                            }
+                            entry.html(data);
+                        }
+
+
+
+            });
+        } else {
+            $.post('http://localhost:8000/ajax/',{
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                entry_id:entry_id,
+                vote_action: 'vote',
+                vote_type: vote_type
+                    },
+                    function(data){
+                        if (data != "his entry"){
+                            entry.addClass('selected');
+                            if(vote_type=="downvote"){
+                                entry.addClass('red');
+                            }
+                            entry.html(data);
+                        }
+
+
+
+            })
+        }
+    });
+</script>
+</body>

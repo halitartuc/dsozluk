@@ -1,0 +1,20 @@
+<link rel="stylesheet" type="text/css" href="/media/templates/css/base.css"/>
+<div class="bar">
+    <div class="logo"><a href="/"><h1>örnek sözlük</h1></a></div>
+        <form class="search-box" action="/arama" method="get">
+            <input class="box search" type="text" name="q" placeholder="başlık...">
+            <button type="submit" class="submit-button" style="border-radius: 0">ara</button>
+        </form>
+    <div class="member-box">
+        {% if user.is_authenticated %}
+            <div class="username">{{ user }}</div>
+            <a class="box" href="/cikis"><small>çıkış</small></a>
+        {% else %}
+            <a class="box" href="/giris-yap"><small>giriş yap</small></a>
+            <a class="box" href="/kayit"><small>kayıt ol</small></a>
+        {% endif %}
+    </div>
+</div>
+<div class="sol-stream">
+    <iframe width="200" height="100%" src="/enson" frameborder="0" allowfullscreen></iframe>
+</div>

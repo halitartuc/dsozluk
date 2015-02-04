@@ -1,0 +1,10 @@
+{% include 'tr/../base.html' %}
+<div class="anasayfa">
+    {% if query %}
+        {% for result in page.object_list %}
+
+        {% endfor %}
+    {% else %}
+      <p>ajanlarımız arama kısmını boş bıraktığını tespit etti. onu hemen doldur evlat!</p>
+    {% endif %}
+</div>

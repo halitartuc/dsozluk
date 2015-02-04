@@ -1,0 +1,23 @@
+{% include 'base.html' %}
+<div class="anasayfa">
+    <div class="profile">
+        <h1 class="titles">{{ pageUser.username }}</h1>
+        <div class="info">
+            <p title="toplam girdiği entry sayısı">{{ totalEntry }}</p>|
+            <p title="bu ay ki entry sayısı">{{ thisMonth }}</p>|
+            <p title="bu hafta ki entry sayısı">{{ thisWeek }}</p>|
+            <p title="bugün girdiği entry sayısı">{{ thisDay }}</p>
+        </div>
+        <a href="/entry/{{ randomEntry.id }}">
+            <blockquote title="rastgele bir entrysi efendism">
+                <i>
+                    {{ randomEntry.entry }}
+                </i>
+                <div title="başlığı efendism" style="position: absolute; left: 0; bottom: 0; font-size: 28px; font-weight: bold; color: rgba(0, 0, 0, 0.05); word-break: break-all">
+                    {{ randomEntry.title }}
+                </div>
+            </blockquote>
+        </a>
+        <p>asd</p>
+    </div>
+</div>
