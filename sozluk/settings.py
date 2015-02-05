@@ -94,6 +94,6 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
 
-MEDIA_ROOT = '/home/bigent/PycharmProjects/sozluk'
+MEDIA_ROOT = '/home/bigent/django-sozluk'
 
 MEDIA_URL = '/media/'

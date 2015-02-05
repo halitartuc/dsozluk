@@ -1,4 +1,5 @@
 {% include 'base.html' %}
+<title>profil - {{ user }} - sözlük</title>
 <div class="anasayfa">
     <div class="profile">
         <h1 class="titles">{{ pageUser.username }}</h1>
@@ -8,16 +9,57 @@
             <p title="bu hafta ki entry sayısı">{{ thisWeek }}</p>|
             <p title="bugün girdiği entry sayısı">{{ thisDay }}</p>
         </div>
-        <a href="/entry/{{ randomEntry.id }}">
-            <blockquote title="rastgele bir entrysi efendism">
-                <i>
-                    {{ randomEntry.entry }}
-                </i>
-                <div title="başlığı efendism" style="position: absolute; left: 0; bottom: 0; font-size: 28px; font-weight: bold; color: rgba(0, 0, 0, 0.05); word-break: break-all">
-                    {{ randomEntry.title }}
+        {% if randomEntry %}
+            <a href="/entry/{{ randomEntry.id }}">
+                <blockquote title="rastgele bir entrysi efendism">
+                    <i>
+                        {{ randomEntry.entry }}
+                    </i>
+                    <div title="başlığı efendism" class="back">
+                        {{ randomEntry.title }}
+                    </div>
+                </blockquote>
+            </a>
+        {% endif %}
+
+        <div style="display: inline-flex">
+            <div class="info-box">
+                <h3 style="margin: 0; padding: 10px" align="center">oyladıkları</h3>
+                <ul style="padding: 0 10px 10px 50px">
+                    {% if VotedEntry %}
+                        {% for vote in VotedEntry %}
+                            <a href="/entry/{{ vote.id }}">
+                                <li>{{ vote.title }} <small><strong>{{ vote }}</strong></small></li>
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <p style="margin-right: 35px" align="center">yok efendism</p>
+                    {% endif %}
+                </ul>
+                <div class="back" style="position: relative">
+                    oyladıkları
                 </div>
-            </blockquote>
-        </a>
-        <p>asd</p>
+            </div>
+
+            <div class="info-box">
+                <h3 style="margin: 0; padding: 10px" align="center">son entryleri</h3>
+                <ul style="padding: 0 10px 10px 50px">
+                    {% if HisEntries %}
+                        {% for entry in HisEntries %}
+                            <a href="/entry/{{ entry.id }}">
+                                <li>{{ entry.title }} <small><strong>{{ entry }}</strong></small></li>
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <p style="margin-right: 35px" align="center">yok efendism</p>
+                    {% endif %}
+                </ul>
+                <div class="back" style="position: relative">
+                    son entryleri
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </div>

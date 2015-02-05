@@ -227,14 +227,34 @@ def UserPage(request, user_name):
             if choice != 1:
                 return EntryModel.objects.filter(author=user, pub_date__range=(startDate, endDate)).count()
             else:
-                return EntryModel.objects.filter(author=user, pub_date__range=(startDate, endDate)).count() - 1
+                return EntryModel.objects.filter(author=user, pub_date__range=(startDate, endDate)).count()
         except:
             return "0"
 
     def randomEntry(user=user):
-        count = EntryModel.objects.filter(author=user).count() - 1
-        return get_list_or_404(EntryModel, author=user)[randint(0, count)]
+        try:
+            count = EntryModel.objects.filter(author=user).count() - 1
+            return EntryModel.objects.filter(author=user)[randint(0, count)]
+        except:
+            return ""
 
+    def VotedEntry(user=user):
+        try:
+            votes = []
+            if EntryModel.objects.filter(upVotes=user):
+                votes.extend(EntryModel.objects.filter(upVotes=user))
+            if EntryModel.objects.filter(downVotes=user):
+                votes.extend(EntryModel.objects.filter(downVotes=user))
+
+            return votes
+        except:
+            return ""
+
+    def HisEntries(user=user):
+        try:
+            return EntryModel.objects.filter(author=user).order_by('-pub_date')
+        except:
+            return ""
 
     return render(request, 'user_page.html', {
         'pageUser': user,
@@ -242,5 +262,7 @@ def UserPage(request, user_name):
         'thisMonth': EntriesEntered(choice=30),
         'thisWeek': EntriesEntered(choice=7),
         'thisDay': EntriesEntered(choice=1),
-        'randomEntry': randomEntry()
+        'randomEntry': randomEntry(),
+        'VotedEntry': VotedEntry(),
+        'HisEntries': HisEntries()
     })

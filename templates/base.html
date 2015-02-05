@@ -7,7 +7,9 @@
         </form>
     <div class="member-box">
         {% if user.is_authenticated %}
-            <div class="username">{{ user }}</div>
+            <a href="/kullanici/{{ user }}" title="profil sayfanız efendism">
+                <div class="username">{{ user }}</div>
+            </a>
             <a class="box" href="/cikis"><small>çıkış</small></a>
         {% else %}
             <a class="box" href="/giris-yap"><small>giriş yap</small></a>

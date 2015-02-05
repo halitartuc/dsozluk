@@ -198,15 +198,29 @@ a:-webkit-any-link {
 
 .profile {
     margin-top: 10px;
-}
-
-.profile .info {
 
 }
 
 .profile .info p {
     display: inline;
     margin: 0 3px 0 3px;
+}
+
+.profile .info-box {
+    width: 400px;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.profile .back {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 28px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.05);
+    word-break: break-all;
 }
 
 blockquote {
@@ -238,7 +252,9 @@ blockquote:after {
     padding-right: 10px;
 }
 
-blockquote:hover {
+blockquote:hover, .profile .info-box h3:hover {
     color: #4d90fe;
     transition: 0.3s;
 }
+
+
