@@ -1,4 +1,7 @@
 # django-sozluk
+<img src="http://i.hizliresim.com/ZW54Eg.png"></img>
+<img src="http://i.hizliresim.com/o2dvkQ.png"></img>
+
 <h2>Turkish(information)</h2>
 <p>Sözlük, herhangi bir kişinin herhangi bir konuda fikrini beyan etmesini sağladığı bir topluluktur. Bu sözlükler herhangi bir konuda hakkında açılabilir. <i>Bu proje <strong>ekşisözlük vb.</strong> websitelerinden <strong>esinlenerek</strong> yapılmıştır.</i></p>
 
