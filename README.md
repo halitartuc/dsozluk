@@ -8,6 +8,7 @@
 <h3>Değişiklik günlüğü</h3>
 <ul>
   <li><strong>05/02/2015</strong> -- django-sozluk github'a eklendi.</li>
+  <li><strong>05/02/2015</strong> -- Kullanıcı sayfasına yeni bilgi kutuları eklendi.</li>
 </ul>
 
 
@@ -17,4 +18,5 @@
 <h3>Changelog</h3>
 <ul>
   <li><strong>05/02/2015</strong> -- django-sozluk has been added to github.</li>
+  <li><strong>05/02/2015</strong> -- The user page was added new infoboxes.</li>
 </ul>
