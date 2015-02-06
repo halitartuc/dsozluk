@@ -1,8 +1,9 @@
 import datetime
+from django.http.response import HttpResponseForbidden, Http404
 from django.utils import tzinfo
 import feedparser
 from django.shortcuts import render, get_object_or_404, get_list_or_404, render_to_response
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, Http404
 from django.core.context_processors import csrf
 from main.forms import EntryForm, RegisterUserForm
 from main.models import Title as TitleModel, Entry as EntryModel
@@ -192,16 +193,16 @@ def vote(request):
     if entry.author != request.user:
         if vote_action == 'vote' and vote_type.find('downvote'):
             entry.upVotes.add(request.user)
-            message = "+{}".format(entry.count_up_votes())
+            message = " {}".format(entry.count_up_votes())
         elif vote_action == 'return' and vote_type.find('downvote'):
             entry.upVotes.remove(request.user)
-            message = "+{}".format(entry.count_up_votes())
+            message = " {}".format(entry.count_up_votes())
         elif vote_action == 'vote' and vote_type.find('upvote'):
             entry.downVotes.add(request.user)
-            message = "-{}".format(entry.count_down_votes())
+            message = " {}".format(entry.count_down_votes())
         elif vote_action == 'return' and vote_type.find('upvote'):
             entry.downVotes.remove(request.user)
-            message = "-{}".format(entry.count_down_votes())
+            message = " {}".format(entry.count_down_votes())
     else:
         if vote_type.find('downvote') or vote_type.find('upvote'):
             message = "his entry"
@@ -246,13 +247,13 @@ def UserPage(request, user_name):
             if EntryModel.objects.filter(downVotes=user):
                 votes.extend(EntryModel.objects.filter(downVotes=user))
 
-            return votes
+            return votes[:10]
         except:
             return ""
 
     def HisEntries(user=user):
         try:
-            return EntryModel.objects.filter(author=user).order_by('-pub_date')
+            return EntryModel.objects.filter(author=user).order_by('-pub_date')[:10]
         except:
             return ""
 
@@ -266,3 +267,27 @@ def UserPage(request, user_name):
         'VotedEntry': VotedEntry(),
         'HisEntries': HisEntries()
     })
+
+def EditPage(request, id):
+    if id:
+        entry = get_object_or_404(EntryModel, id=id)
+        if request.user != entry.author:
+            return Http404()
+    else:
+        return Http404()
+
+    if request.POST:
+        form = EntryForm(request.POST, instance=entry)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/entry/{}'.format(entry.id))
+    else:
+        form = EntryForm(instance=entry)
+
+    args = {}
+    args.update(csrf(request))
+    args['form'] = form
+    return render(request, 'edit_entry.html', {
+        'form': args,
+        'entry': entry
+        })

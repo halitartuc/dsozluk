@@ -1,5 +1,11 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
-
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/fontawesome-webfont.eot?v=4.3.0');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.3.0') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.3.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.3.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 body {
     font-family: 'Open Sans Condensed', sans-serif;
@@ -37,13 +43,29 @@ body {
 }
 
 .search-box {
-    font-size: 0;
+    display: inline-flex;
     margin: 25px 0 25px 0;
 }
 
-.box {
-    height: 25px;
+.search-box input[type="text"] {
+    height: 28px;
+    outline: none;
+    background-color: #ffffff;
+    border: 0;
 }
+
+.search-box:before{
+    background-color: #ffffff;
+    font-family: FontAwesome;
+    content: "\f002";
+    width: 25px;
+    height: 21px;
+    font-size: 13px;
+    text-align: center;
+    padding-top: 7px;
+
+}
+
 
 a:-webkit-any-link {
     text-decoration: inherit;
@@ -53,7 +75,7 @@ a:-webkit-any-link {
 .submit-button {
     border: 0;
     background-color: #4d90fe;
-    border-radius: 2px;
+    border-radius: 4px;
     color: white;
     font-weight: bold;
     padding: 5px 10px 5px 10px;
@@ -117,7 +139,7 @@ a:-webkit-any-link {
 }
 
 .entry p {
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .entry-ozellikler {
@@ -137,6 +159,16 @@ a:-webkit-any-link {
     cursor: pointer;
 }
 
+.upvote:before {
+    font-family: FontAwesome;
+    content: "\f164";
+}
+
+.downvote:before{
+    font-family: FontAwesome;
+    content: "\f165";
+}
+
 .entry-ozellikler .right {
     text-align: right;
 }
@@ -147,12 +179,15 @@ a:-webkit-any-link {
 }
 
 .entry .selected {
-    color: #4d90fe;
-    font-weight: bold;
+    color: #2fa80b;
 }
 
 .entry .red {
     color: red;
+}
+
+.upvote:hover, .downvote:hover, .edit:hover {
+    color: #4d90fe;
 }
 
 .pages {
@@ -213,6 +248,10 @@ a:-webkit-any-link {
     margin: 10px;
 }
 
+.profile .info-box li {
+    width: auto;
+}
+
 .profile .back {
     position: absolute;
     left: 0;
@@ -252,7 +291,49 @@ blockquote:after {
     padding-right: 10px;
 }
 
-blockquote:hover, .profile .info-box h3:hover {
+blockquote:hover, .profile .info-box li a:hover {
     color: #4d90fe;
     transition: 0.3s;
+}
+
+input[type="submit"], button, .submit-button {
+    font-family: 'Open Sans Condensed';
+    border-radius: 4px;
+    border: none;
+    outline: none;
+}
+
+input[type="submit"]:hover, button:hover, .submit-button:hover {
+    background-color: #274f8c;
+}
+
+input[type="submit"]:active, button:active, .submit-button:active {
+
+    box-shadow: inset 0 0 0 1px #274f8c,inset 0 5px 30px #193047;
+}
+
+.icon:before {
+    font-family: FontAwesome;
+}
+
+.logout:before {
+    content: "\f08b";
+}
+
+.login:before {
+    content: "\f090";
+}
+
+.register:before {
+    content: "\f0c0";
+}
+
+.edit:before {
+    content: "\f044";
+    font-size: small;
+    opacity: 0.5;
+}
+
+.member-box .box small{
+    padding-left: 5px;
 }

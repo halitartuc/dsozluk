@@ -28,17 +28,16 @@
                 <ul style="padding: 0 10px 10px 50px">
                     {% if VotedEntry %}
                         {% for vote in VotedEntry %}
-                            <a href="/entry/{{ vote.id }}">
-                                <li>{{ vote.title }} <small><strong>{{ vote }}</strong></small></li>
-                            </a>
+                            <li>
+                                <a href="/entry/{{ vote.id }}">
+                                    {{ vote.title }} <small><strong>{{ vote }}</strong></small>
+                                </a>
+                            </li>
                         {% endfor %}
                     {% else %}
                         <p style="margin-right: 35px" align="center">yok efendism</p>
                     {% endif %}
                 </ul>
-                <div class="back" style="position: relative">
-                    oyladıkları
-                </div>
             </div>
 
             <div class="info-box">
@@ -46,17 +45,16 @@
                 <ul style="padding: 0 10px 10px 50px">
                     {% if HisEntries %}
                         {% for entry in HisEntries %}
-                            <a href="/entry/{{ entry.id }}">
-                                <li>{{ entry.title }} <small><strong>{{ entry }}</strong></small></li>
-                            </a>
+                            <li>
+                                <a href="/entry/{{ entry.id }}">
+                                    {{ entry.title }} <small><strong>{{ entry }}</strong></small>
+                                </a>
+                            </li>
                         {% endfor %}
                     {% else %}
                         <p style="margin-right: 35px" align="center">yok efendism</p>
                     {% endif %}
                 </ul>
-                <div class="back" style="position: relative">
-                    son entryleri
-                </div>
             </div>
 
         </div>

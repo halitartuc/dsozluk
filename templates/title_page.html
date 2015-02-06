@@ -56,16 +56,21 @@
             <div class="entry">
                 <p style="margin-top: 5px">{{ entry.entry }}</p>
                 <div class="entry-ozellikler">
-                    {% if user.is_authenticated  %}<small><div class="left" style="display: inline-flex">
-                        <div id="{{ entry.id }}" class="downvote{% for i in entry.downVotes.all %}{% if i == user %} selected red{% endif %}{% endfor %}">
-                            -{{ entry.count_down_votes }}
+                    <small>
+                        <div class="left" style="display: inline-flex">
+                            <div id="{{ entry.id }}" class="downvote{% for i in entry.downVotes.all %}{% if i == user %} selected red{% endif %}{% endfor %}">
+                                {{ entry.count_down_votes }}
+                            </div>&nbsp;
+                            <div id="{{ entry.id }}" class="upvote{% for i in entry.upVotes.all %}{% if i == user %} selected{% endif %}{% endfor %}">
+                                {{ entry.count_up_votes }}
+                            </div>
                         </div>
-                        <div id="{{ entry.id }}" class="upvote{% for i in entry.upVotes.all %}{% if i == user %} selected{% endif %}{% endfor %}">
-                            +{{ entry.count_up_votes }}
-                        </div>
-                    </div></small>{% endif %}
+                    </small>
                     <div class="right">
-                        <a style="font-size: small" href="/entry/{{ entry.id }}"><small class="small" style="margin-right: 10px">
+                        {% if user == entry.author %}
+                            <a class="icon edit" href="/entry/duzenle/{{ entry.id }}" title="düzenle"></a>
+                        {% endif %}
+                        <a style="font-size: small" href="/entry/{{ entry.id }}"><small class="small" style="margin: 0 10px 0 10px">
                             {% if entry.pub_date.date == entry.last_edited.date and entry.pub_date.hour == entry.last_edited.hour and entry.pub_date.minute == entry.last_edited.minute and entry.pub_date.second == entry.last_edited.second %}
                                 {{ entry.pub_date }}
                             {% else %}

@@ -1,19 +1,20 @@
 <link rel="stylesheet" type="text/css" href="/media/templates/css/base.css"/>
 <div class="bar">
     <div class="logo"><a href="/"><h1>örnek sözlük</h1></a></div>
-        <form class="search-box" action="/arama" method="get">
-            <input class="box search" type="text" name="q" placeholder="başlık...">
-            <button type="submit" class="submit-button" style="border-radius: 0">ara</button>
+    <div class="search-box" align="center">
+        <form action="/arama" method="get">
+            <input name="q" type="text" placeholder="...başlık">
         </form>
+    </div>
     <div class="member-box">
         {% if user.is_authenticated %}
             <a href="/kullanici/{{ user }}" title="profil sayfanız efendism">
                 <div class="username">{{ user }}</div>
             </a>
-            <a class="box" href="/cikis"><small>çıkış</small></a>
+            <a class="box icon logout" href="/cikis"><small>çıkış</small></a>
         {% else %}
-            <a class="box" href="/giris-yap"><small>giriş yap</small></a>
-            <a class="box" href="/kayit"><small>kayıt ol</small></a>
+            <a class="box icon login" href="/giris-yap"><small>giriş yap</small></a>
+            <a class="box icon register" href="/kayit"><small>kayıt ol</small></a>
         {% endif %}
     </div>
 </div>
