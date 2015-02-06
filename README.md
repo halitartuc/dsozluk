@@ -1,6 +1,7 @@
 # django-sozluk
-<img src="http://i.hizliresim.com/ZW54Eg.png"></img>
-<img src="http://i.hizliresim.com/o2dvkQ.png"></img>
+<img src="http://i.hizliresim.com/jLagXm.png"></img>
+<img src="http://i.hizliresim.com/2yR6nA.png"></img>
+<img src="http://i.hizliresim.com/BE1avp.png"></img>
 
 <h2>Turkish(information)</h2>
 <p>Sözlük, herhangi bir kişinin herhangi bir konuda fikrini beyan etmesini sağladığı bir topluluktur. Bu sözlükler herhangi bir konuda hakkında açılabilir. <i>Bu proje <strong>ekşisözlük vb.</strong> websitelerinden <strong>esinlenerek</strong> yapılmıştır.</i></p>
@@ -9,6 +10,7 @@
 <ul>
   <li><strong>05/02/2015</strong> -- django-sozluk github'a eklendi.</li>
   <li><strong>05/02/2015</strong> -- Kullanıcı sayfasına yeni bilgi kutuları eklendi.</li>
+  <li><strong>06/02/2015</strong> -- Sayfalara ikonlar eklendi. Butonlara efekt eklendi. Entry düzenleme sayfası oluşturuldu.</li>
 </ul>
 
 
@@ -19,4 +21,5 @@
 <ul>
   <li><strong>05/02/2015</strong> -- django-sozluk has been added to github.</li>
   <li><strong>05/02/2015</strong> -- The user page was added new infoboxes.</li>
+  <li><strong>06/02/2015</strong> -- The pages was added icons. The buttons was added effect. Created the entry editing page.</li>
 </ul>
