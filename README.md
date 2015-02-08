@@ -11,6 +11,7 @@
   <li><strong>05/02/2015</strong> -- django-sozluk github'a eklendi.</li>
   <li><strong>05/02/2015</strong> -- Kullanıcı sayfasına yeni bilgi kutuları eklendi.</li>
   <li><strong>06/02/2015</strong> -- Sayfalara ikonlar eklendi. Butonlara efekt eklendi. Entry düzenleme sayfası oluşturuldu.</li>
+  <li><strong>08/02/2015</strong> -- Kullanıcı sayfasındaki kutular düzenlendi. Entryleri düzenleme ve silme özelliği eklendi.</li>
 </ul>
 
 
@@ -22,4 +23,5 @@
   <li><strong>05/02/2015</strong> -- django-sozluk has been added to github.</li>
   <li><strong>05/02/2015</strong> -- The user page was added new infoboxes.</li>
   <li><strong>06/02/2015</strong> -- The pages was added icons. The buttons was added effect. Created the entry editing page.</li>
+  <li><strong>08/02/2015</strong> -- The boxes in user page was edited. You can remove or delete entry.</li>
 </ul>
