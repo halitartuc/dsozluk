@@ -25,5 +25,3 @@
   <li><strong>06/02/2015</strong> -- The pages was added icons. The buttons was added effect. Created the entry editing page.</li>
   <li><strong>08/02/2015</strong> -- The boxes in user page was edited. You can remove or delete entry.</li>
 </ul>
-
-![Codeship Status](https://codeship.com/projects/4cb52860-91f3-0132-c6b0-467b54e021a2/status?branch=master)
