@@ -309,7 +309,6 @@ def deleteentry(request):
     if request.user == get_object_or_404(EntryModel, id=id).author:
         get_object_or_404(EntryModel, id=id).delete()
         message = "entryiniz silindi efendism"
-
     else:
         message = "ajanlarımız izinsiz bir işlem yaptığını tespit etti"
 
