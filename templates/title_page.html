@@ -52,7 +52,17 @@
     </div>
     <div class="entryler">
         {% for entry in entries %}
-            <small class="small">{{ entry }}</small>
+            {% if user == entry.author %}
+                <small class="small" style="position: absolute">{{ entry }}</small>
+                <small style="display: block; position: relative" align="right">
+                    <a class="icon edit" href="/entry/duzenle/{{ entry.id }}" title="düzenle" style="line-height: 18px"></a>
+                    <a id="{{ entry.id }}" class="icon remove" title="sil" style="line-height: 18px"></a>
+                </small>
+            {% else %}
+                <small class="small">{{ entry }}</small>
+            {% endif %}
+
+
             <div class="entry">
                 <p style="margin-top: 5px">{{ entry.entry }}</p>
                 <div class="entry-ozellikler">
@@ -67,9 +77,6 @@
                         </div>
                     </small>
                     <div class="right">
-                        {% if user == entry.author %}
-                            <a class="icon edit" href="/entry/duzenle/{{ entry.id }}" title="düzenle"></a>
-                        {% endif %}
                         <a style="font-size: small" href="/entry/{{ entry.id }}"><small class="small" style="margin: 0 10px 0 10px">
                             {% if entry.pub_date.date == entry.last_edited.date and entry.pub_date.hour == entry.last_edited.hour and entry.pub_date.minute == entry.last_edited.minute and entry.pub_date.second == entry.last_edited.second %}
                                 {{ entry.pub_date }}
@@ -143,6 +150,16 @@
 
             })
         }
+    });
+
+    $(".remove").click(function() {
+        var id = $(this).attr('id');
+        $.post('http://localhost:8000/remove/', {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            id: id},
+                function(data){
+                    alert(data);
+        })
     });
 </script>
 </body>

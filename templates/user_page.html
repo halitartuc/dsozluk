@@ -24,7 +24,9 @@
 
         <div style="display: inline-flex">
             <div class="info-box">
-                <h3 style="margin: 0; padding: 10px" align="center">oyladıkları</h3>
+                <span class="upvote back-icon"></span>
+                <span class="downvote-after back-icon"></span>
+                <h3 style="margin: 0; padding: 10px" align="center">oyladıkları <small>({{ totalvotes }})</small></h3>
                 <ul style="padding: 0 10px 10px 50px">
                     {% if VotedEntry %}
                         {% for vote in VotedEntry %}
@@ -41,7 +43,8 @@
             </div>
 
             <div class="info-box">
-                <h3 style="margin: 0; padding: 10px" align="center">son entryleri</h3>
+                <span class="entries back-icon"></span>
+                <h3 style="margin: 0; padding: 10px" align="center">son entryleri <small>({{ totalEntry }})</small></h3>
                 <ul style="padding: 0 10px 10px 50px">
                     {% if HisEntries %}
                         {% for entry in HisEntries %}

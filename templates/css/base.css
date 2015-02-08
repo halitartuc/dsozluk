@@ -186,7 +186,7 @@ a:-webkit-any-link {
     color: red;
 }
 
-.upvote:hover, .downvote:hover, .edit:hover {
+.upvote:hover, .downvote:hover, .edit:hover, .remove:hover {
     color: #4d90fe;
 }
 
@@ -316,6 +316,10 @@ input[type="submit"]:active, button:active, .submit-button:active {
     font-family: FontAwesome;
 }
 
+.icon:hover {
+    transition: 0.3s
+}
+
 .logout:before {
     content: "\f08b";
 }
@@ -328,12 +332,39 @@ input[type="submit"]:active, button:active, .submit-button:active {
     content: "\f0c0";
 }
 
+.remove:before {
+    content: "\f00d";
+    font-size: small;
+    opacity: 0.5;
+}
+
 .edit:before {
     content: "\f044";
     font-size: small;
     opacity: 0.5;
 }
 
+.info-box .entries:before {
+    content: "\f086";
+    font-size: 100px;
+    color: rgba(0, 0, 0, 0.05);
+    font-weight: normal;
+}
+
 .member-box .box small{
     padding-left: 5px;
+}
+
+.info-box .back-icon:before, .info-box .back-icon:after {
+    font-family: FontAwesome;
+    position: absolute;
+    font-size: 100px;
+    z-index: -1;
+    bottom: 10px;
+    color: rgba(0, 0, 0, 0.05);
+}
+
+.info-box .downvote-after:after {
+    content: "\f165";
+    left: 303px;
 }

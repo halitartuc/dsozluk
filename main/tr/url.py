@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^cikis', 'main.views.Logout'),
     url(r'^kayit', 'main.views.RegisterUserPage'),
     url(r'^ajax/', 'main.views.vote'),
+    url(r'^remove/$', 'main.views.deleteentry'),
     url(r'^kullanici/(?P<user_name>[\w\W]+)', 'main.views.UserPage'),
     url(r'^entry/duzenle/(?P<id>\d+)', 'main.views.EditPage')
 )

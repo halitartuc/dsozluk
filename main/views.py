@@ -247,15 +247,15 @@ def UserPage(request, user_name):
             if EntryModel.objects.filter(downVotes=user):
                 votes.extend(EntryModel.objects.filter(downVotes=user))
 
-            return votes[:10]
+            return votes
         except:
-            return ""
+            return []
 
     def HisEntries(user=user):
         try:
             return EntryModel.objects.filter(author=user).order_by('-pub_date')[:10]
         except:
-            return ""
+            return []
 
     return render(request, 'user_page.html', {
         'pageUser': user,
@@ -264,8 +264,10 @@ def UserPage(request, user_name):
         'thisWeek': EntriesEntered(choice=7),
         'thisDay': EntriesEntered(choice=1),
         'randomEntry': randomEntry(),
-        'VotedEntry': VotedEntry(),
-        'HisEntries': HisEntries()
+        'VotedEntry': VotedEntry()[:10],
+        'HisEntries': HisEntries(),
+        'totalvotes': len(VotedEntry())
+
     })
 
 def EditPage(request, id):
@@ -291,3 +293,24 @@ def EditPage(request, id):
         'form': args,
         'entry': entry
         })
+
+def deleteentry(request):
+    if request.POST:
+        id = request.POST['id']
+
+    else:
+        id = ''
+
+    try:
+        get_object_or_404(EntryModel, id=id)
+    except:
+        return HttpResponseRedirect('/')
+
+    if request.user == get_object_or_404(EntryModel, id=id).author:
+        get_object_or_404(EntryModel, id=id).delete()
+        message = "entryiniz silindi efendism"
+
+    else:
+        message = "ajanlarımız izinsiz bir işlem yaptığını tespit etti"
+
+    return render(request, 'ajax.html', {'message': message})
