@@ -1,21 +1,26 @@
 {% include 'base.html' %}
+<title>giriş - sözlük</title>
 <div class="anasayfa">
-    <p>
-        <form action="auth" method="post">
-            {% csrf_token %}
-            <p>
-                <label for="username"><small>kullanıcı adı</small></label><br>
-                <input type="text" name="username" id="username">
-            </p>
-            <p>
-                <label for="password"><small>şifre</small></label><br>
-                <input type="password" name="password" id="password"><br>
-                <input type="checkbox" id="remember_me" name="_remember_me"/>
-                <label for="remember_me"><small>beni hatırla</small></label>
-            </p>
-            <input class="submit-button" type="submit" value="giriş yap"/>
-        </form>
-
-
-    </p>
+    <h1 class="titles">kullanıcı giriş sayfası</h1>
+    {% if status == "1" %}
+        <p style="color: red">şifrenizi boş bırakamazsınız efendism</p>
+    {% elif status == "2" %}
+        <p style="color: red">şifrenizi yanlış girdiniz efendism</p>
+    {% elif status == "3" %}
+        <p style="color: red">kullanıcı adı ve şifrenizi boş bırakamazsınız efendism</p>
+    {% endif %}
+    <form action="auth" method="post">
+        {% csrf_token %}
+        <div class="input-group">
+            <label class="input-group-label icon username-icon" for="username"></label>
+            <input class="input-group-input" type="text" name="username" id="username" placeholder="kullanıcı adı">
+        </div>
+        <div class="input-group">
+            <label class="input-group-label icon password-icon" for="password"></label>
+            <input class="input-group-input" type="password" name="password" id="password" placeholder="şifre">
+        </div>
+        <input type="checkbox" id="remember_me" name="_remember_me"/>
+        <label for="remember_me"><small>beni hatırla</small></label>
+        <p><input class="submit-button" type="submit" value="giriş yap"/></p>
+    </form>
 </div>

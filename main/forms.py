@@ -31,3 +31,15 @@ class RegisterUserForm(UserCreationForm):
             user.save()
 
         return user
+
+    def __init__(self, *args, **kwargs):
+        super(RegisterUserForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({
+            'placeholder': 'kullanıcı adı'
+        })
+        self.fields['password1'].widget.attrs.update({
+            'placeholder': 'şifre'
+        })
+        self.fields['password2'].widget.attrs.update({
+            'placeholder': 'şifre onayı'
+        })

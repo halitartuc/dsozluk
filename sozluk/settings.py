@@ -50,6 +50,14 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+
+    # Put your context processors here
+
+    'django.core.context_processors.request',
+    'django.contrib.auth.context_processors.auth'
+)
+
 ROOT_URLCONF = 'sozluk.urls'
 
 WSGI_APPLICATION = 'sozluk.wsgi.application'

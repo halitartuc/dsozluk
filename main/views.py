@@ -1,5 +1,6 @@
 import datetime
 from django.http.response import HttpResponseForbidden, Http404
+from django.template.context import RequestContext
 from django.utils import tzinfo
 import feedparser
 from django.shortcuts import render, get_object_or_404, get_list_or_404, render_to_response
@@ -44,6 +45,9 @@ def TitlePage(request, title):
         num = "1"
 
 
+    #hitcount
+
+
 
     return render(request, 'title_page.html', {
         'title': title,
@@ -52,7 +56,7 @@ def TitlePage(request, title):
         'pages': pages,
         'current_page': entries_of_the_title,
         'page_num': num
-        })
+        }, context_instance=RequestContext(request))
 
 def EntryPage(request, entry_id):
     entry = get_object_or_404(EntryModel, id=entry_id)
@@ -73,21 +77,6 @@ def EntryPage(request, entry_id):
         'form': args
     })
 
-def FeedPage(request):
-    #feed
-    feeds = feedparser.parse('http://localhost:8000/feed/enson')
-    try:
-        return render(request, 'feed_1.html', {
-            'feeds': feeds.entries[1:-1],
-            'first': feeds.entries[0],
-            'last': feeds.entries[-1]
-            })
-    except:
-        return render(request, 'feed_1.html', {
-            'feeds': '',
-            'first': '',
-            'last': ''
-            })
 
 def SearchPage(request):
     try:
@@ -130,7 +119,12 @@ def LoginPage(request):
     except:
         c = {}
         c.update(csrf(request))
-        return render_to_response('login.html', c)
+        try:
+            status = request.GET['q']
+        except:
+            status = ""
+
+        return render(request, 'login.html', {'c': c, 'status': status})
 
 def AuthView(request):
     username = request.POST.get('username', '')
@@ -141,8 +135,15 @@ def AuthView(request):
     if user is not None:
         auth.login(request, user)
         return HttpResponseRedirect('/')
+    elif User.objects.filter(username=username):
+        if not password:
+            return HttpResponseRedirect('/giris?q=1')
+        else:
+            return HttpResponseRedirect('/giris?q=2')
+    elif not username and not password:
+        return HttpResponseRedirect('/giris?q=3')
     else:
-        return HttpResponseRedirect('/basarisiz-giris')
+        return HttpResponseRedirect('/giris?q=3')
 
 def Logout(request):
     auth.logout(request)
@@ -313,3 +314,25 @@ def deleteentry(request):
         message = "ajanlarımız izinsiz bir işlem yaptığını tespit etti"
 
     return render(request, 'ajax.html', {'message': message})
+
+
+def refresh_left_frame(request):
+    #LastFeed
+    LastFeeds = feedparser.parse('http://localhost:8000/feed/enson')
+    try:
+        last_feeds = LastFeeds.entries[1:-1]
+        last_first = LastFeeds.entries[0]
+        last_last = LastFeeds.entries[-1]
+    except:
+        last_feeds = []
+        last_first = []
+        last_last = []
+
+
+    #return
+
+    return render(request, 'ajax.html', {
+        'last_feeds': last_feeds,
+        'last_first': last_first,
+        'last_last': last_last
+    })

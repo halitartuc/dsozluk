@@ -83,9 +83,8 @@ a:-webkit-any-link {
 
 .yenile-button {
     line-height: 20px;
-    right: 0;
+    width: 20px;
     text-align: center;
-    border: 1px solid #aaaaaa;
 }
 
 .small {
@@ -99,6 +98,7 @@ a:-webkit-any-link {
     border-bottom: 1px solid #aaaaaa;
     line-height: 25px;
 }
+
 
 .rss {
     font-size: small;
@@ -155,8 +155,12 @@ a:-webkit-any-link {
     margin-right: 5px;
 }
 
-.left .downvote:hover, .left .upvote:hover {
+.left .downvote:hover, .left .upvote:hover, .feed-ul li:hover {
     cursor: pointer;
+}
+
+.left .upvote:before, .left .downvote:before, .left .facebook-share-icon:before, .left .twitter-share-icon:before {
+    opacity: 0.3;
 }
 
 .upvote:before {
@@ -182,12 +186,17 @@ a:-webkit-any-link {
     color: #2fa80b;
 }
 
+.entry .selected:before {
+    opacity: 1;
+}
+
 .entry .red {
     color: red;
 }
 
 .upvote:hover, .downvote:hover, .edit:hover, .remove:hover {
     color: #4d90fe;
+    cursor: pointer;
 }
 
 .pages {
@@ -313,7 +322,10 @@ input[type="submit"]:active, button:active, .submit-button:active {
 }
 
 .icon:before {
+    display: inline-block;
     font-family: FontAwesome;
+    width: 1.28571429em;
+    text-align: center;
 }
 
 .icon:hover {
@@ -333,7 +345,7 @@ input[type="submit"]:active, button:active, .submit-button:active {
 }
 
 .remove:before {
-    content: "\f00d";
+    content: "\f1f8";
     font-size: small;
     opacity: 0.5;
 }
@@ -368,3 +380,88 @@ input[type="submit"]:active, button:active, .submit-button:active {
     content: "\f165";
     left: 303px;
 }
+
+.feed-ul {
+    display: flex;
+    margin-bottom: 10px;
+
+}
+
+.feed-ul li {
+    float: left;
+    padding: 0 5px 0 5px;
+}
+
+.input-group{
+    position: relative;
+    display: table;
+    margin-bottom: 10px;
+
+}
+
+.input-group-label {
+    display: table-cell;
+    font-size: 14px;
+    padding: 6px 12px;
+    line-height: 1;
+    background-color: #eeeeee;
+    border: 1px solid rgba(0, 0, 0, 0.31);
+    border-right: 0;
+    vertical-align: middle;
+    border-radius: 4px 0 0 4px;
+    width: 1%;
+}
+
+.input-group-label:before {
+
+}
+
+.input-group input[type="text"], .input-group input[type="password"], .input-group input[type="email"] {
+    border: 1px solid rgba(0, 0, 0, 0.31);
+    line-height: 33px;
+    padding: 1px 10px 1px 10px;
+    transition: 0.3s;
+    border-radius: 0 4px 4px 0;
+    width: 200px;
+
+}
+
+
+
+.input-group input[type="text"]:focus, .input-group input[type="password"]:focus, .input-group input[type="email"]:focus {
+    outline: none;
+    border-color: rgba(68, 115, 215, 0.64);
+}
+
+.username-icon:before {
+    content: "\f007";
+}
+
+.password-icon:before {
+    content: "\f084";
+}
+
+.email-icon:before {
+    content: "\f003";
+}
+
+.facebook-share-icon:before {
+    content: '\f09a';
+    line-height: 18px;
+}
+
+.twitter-share-icon:before {
+    content: '\f099';
+    line-height: 18px;
+}
+
+.facebook-share-icon:hover {
+    color: #3b5998;
+}
+
+.twitter-share-icon:hover {
+    color: #55acee;
+}
+
+
+

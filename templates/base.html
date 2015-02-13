@@ -1,6 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/media/templates/css/base.css"/>
+<script src="/media/templates/js/jquery.min.js"></script>
 <div class="bar">
-    <div class="logo"><a href="/"><h1>örnek sözlük</h1></a></div>
+    <div class="logo"><a href="/"><h1>örneksözlük</h1></a></div>
     <div class="search-box" align="center">
         <form action="/arama" method="get">
             <input name="q" type="text" placeholder="...başlık">
@@ -13,11 +14,104 @@
             </a>
             <a class="box icon logout" href="/cikis"><small>çıkış</small></a>
         {% else %}
-            <a class="box icon login" href="/giris-yap"><small>giriş yap</small></a>
+            <a class="box icon login" href="/giris"><small>giriş yap</small></a>
             <a class="box icon register" href="/kayit"><small>kayıt ol</small></a>
         {% endif %}
     </div>
 </div>
 <div class="sol-stream">
-    <iframe width="200" height="100%" src="/enson" frameborder="0" allowfullscreen></iframe>
+    <ul class="feed-ul">
+        <li id="refresh" style="transition: 5s">↻</li>
+        <li id="last">en son</li>
+        <li id="popular" style="font-weight: bold">popüler</li>
+    </ul>
+    <div id="frames" style="font-size: small">
+        <div id="last" style="display: none"></div>
+        <div id="popular" style="display: block"></div>
+    </div>
 </div>
+
+<script>
+
+    $(".feed-ul li").click(function () {
+       var id = $(this).attr('id');
+       var li = $(this);
+       if(id != "refresh"){
+           $(".feed-ul li").css("font-weight", "normal");
+           $("#frames div").attr('style', 'display: none');
+
+           li.css("font-weight", "bold");
+
+           $("#frames #"+id+", #frames #"+id+" .feed").css('display', 'block');
+       } else {
+           $('#frames #last').html("");
+           $('#frames #popular').html("");
+
+           $.post('http://localhost:8000/feed/enson/',{
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    function(data){
+                        $(data).find('item').each(function() {
+                            var title = $(this).find('title').text();
+                            var description = $(this).find('description').text();
+                            var link = $(this).find('link').text();
+
+
+                            var wrapper = "<a target='_parent' href='"+link+"'><div class='feed'>"+title+"<small>("+description+")</small>"+"</div></a>";
+                            $('#frames #last').append(wrapper);
+                        })
+            });
+
+            $.post('http://localhost:8000/feed/populartitle/',{
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                            function(data){
+                                $(data).find('item').each(function() {
+                                    var title = $(this).find('title').text();
+                                    var description = $(this).find('description').text();
+                                    var link = $(this).find('link').text();
+
+
+                                    var wrapper = "<a target='_parent' href='"+link+"'><div class='feed'>"+title+"</div></a>";
+                                    $('#frames #popular').append(wrapper);
+                                })
+                    });
+               }
+            });
+
+    $.post('http://localhost:8000/feed/enson/',{
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    function(data){
+                        $(data).find('item').each(function() {
+                            var title = $(this).find('title').text();
+                            var description = $(this).find('description').text();
+                            var link = $(this).find('link').text();
+
+
+                            var wrapper = "<a target='_parent' href='"+link+"'><div class='feed'>"+title+"<small>("+description+")</small>"+"</div></a>";
+
+                            $('#frames #last').append(wrapper);
+                        })
+            });
+
+    $.post('http://localhost:8000/feed/populartitle/',{
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    function(data){
+                        $(data).find('item').each(function() {
+                            var title = $(this).find('title').text();
+                            var description = $(this).find('description').text();
+                            var link = $(this).find('link').text();
+
+
+                            var wrapper = "<a target='_parent' href='"+link+"'><div class='feed'>"+title+"</div></a>";
+
+                            $('#frames #popular').append(wrapper);
+                        })
+            });
+
+
+
+
+</script>
