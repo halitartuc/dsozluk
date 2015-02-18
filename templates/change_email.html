@@ -1,0 +1,32 @@
+{% include 'base.html' %}
+<title>e-mailini değiştir - sözlük</title>
+<div class="anasayfa icon page-back-icon email-icon">
+    <h1 class="titles">e-mailini değiştir</h1>
+    {% if status == "1" %}
+        <p style="color: red">girdiğiniz e-mail eski e-mailiniz ile uyuşmuyor efendism, yoksa siz...</p>
+    {% elif status == "2" %}
+        <p style="color: red">yazdığınız yeni e-mailleriniz uyuşmuyor efendism</p>
+    {% elif status == "3" %}
+        <p style="color: red">eski e-mailinizi boş bırakamazsınız efendism</p>
+    {% elif status == "4" %}
+        <p style="color: red">yeni e-mailinizi boş bırakamazsınız efendism</p>
+    {% elif status == "5" %}
+        <p style="color: green">e-mailiniz başarı ile değiştirildi efendism</p>
+    {% endif %}
+    <form action method="post">
+        {% csrf_token %}
+        <div class="input-group">
+            <label class="input-group-label icon email-icon" for="id_oldemail"></label>
+            <input class="input-group-input" type="email" id="id_oldemail" name="oldemail" placeholder="eski e-mailiniz">
+        </div>
+        <div class="input-group">
+            <label class="input-group-label icon email-icon" for="id_newemail1"></label>
+            <input class="input-group-input" type="email" id="id_newemail1" name="newemail1" placeholder="yeni e-mailiniz">
+        </div>
+        <div class="input-group">
+            <label class="input-group-label icon email-icon" for="id_newemail2"></label>
+            <input class="input-group-input" type="email" id="id_newemail2" name="newemail2" placeholder="yeni e-mailinizin onayı">
+        </div>
+        <input class="submit-button" type="submit" value="onayla">
+    </form>
+</div>

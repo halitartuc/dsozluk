@@ -1,7 +1,8 @@
 import datetime
-from django.http.response import HttpResponseForbidden, Http404
+from django.http.response import HttpResponseForbidden, Http404, HttpResponse
 from django.template.context import RequestContext
 from django.utils import tzinfo
+from django.utils.datastructures import MultiValueDictKeyError
 import feedparser
 from django.shortcuts import render, get_object_or_404, get_list_or_404, render_to_response
 from django.http import HttpResponseRedirect, Http404
@@ -111,6 +112,31 @@ def SearchPage(request):
     except:
         return render(request, 'search/search.html')
 
+def RealTimeSearch(reqeust):
+    if reqeust.POST:
+        value = reqeust.POST['value']
+    else:
+        value = ""
+
+    if value and TitleModel.objects.filter(name__istartswith=value):
+        results = TitleModel.objects.filter(name__contains=value, name__istartswith=value).order_by()[:5]
+        html = ""
+        for result in results:
+            data = """
+                <li>
+                    <a href='{}'>
+                        {}
+                    </a>
+                </li>
+            """.format("/baslik/{}".format(result.name), result.name)
+        html += data
+    elif not value:
+        html = "<li>arama kutusuna bir şeyler yazın efendism.</li>"
+    else:
+        html = "<li>herhangi bir şey bulamadık efendism.</li>"
+
+    return HttpResponse(html)
+
 from django.contrib import auth
 def LoginPage(request):
     try:
@@ -137,13 +163,13 @@ def AuthView(request):
         return HttpResponseRedirect('/')
     elif User.objects.filter(username=username):
         if not password:
-            return HttpResponseRedirect('/giris?q=1')
+            return HttpResponseRedirect('/account/login?q=1')
         else:
-            return HttpResponseRedirect('/giris?q=2')
+            return HttpResponseRedirect('/account/login?q=2')
     elif not username and not password:
-        return HttpResponseRedirect('/giris?q=3')
+        return HttpResponseRedirect('/account/login?q=3')
     else:
-        return HttpResponseRedirect('/giris?q=3')
+        return HttpResponseRedirect('/account/login?q=4')
 
 def Logout(request):
     auth.logout(request)
@@ -158,7 +184,7 @@ def RegisterUserPage(request):
             form = RegisterUserForm(request.POST)
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect('/giris-yap')
+                return HttpResponseRedirect('/account/login')
         else:
             form = RegisterUserForm()
         args = {}
@@ -336,3 +362,109 @@ def refresh_left_frame(request):
         'last_first': last_first,
         'last_last': last_last
     })
+
+def ChangePassword(request):
+    if not request.user:
+            return HttpResponseRedirect('/')
+            pass
+    else:
+        try:
+            user = User.objects.get(username=request.user)
+        except:
+            return HttpResponseRedirect('/')
+            pass
+
+    if request.POST:
+        try:
+            oldpass = request.POST['oldpass']
+        except:
+            oldpass = ""
+        try:
+            newpass1 = request.POST['newpass1']
+        except:
+            newpass1 = ""
+        try:
+            newpass2 = request.POST['newpass2']
+        except:
+            newpass2 = ""
+        if user.check_password(oldpass):
+            if not oldpass:
+                return HttpResponseRedirect('?q=3')
+                pass
+            if not newpass1:
+                return HttpResponseRedirect('?q=4')
+            if not newpass2:
+                return HttpResponseRedirect('?q=4')
+            if newpass1 == newpass2:
+                user.set_password(newpass1)
+                user.save()
+                return HttpResponseRedirect('?q=5')
+            else:
+                return HttpResponseRedirect('?q=2')
+        else:
+            return HttpResponseRedirect('?q=1')
+
+    args = {}
+    args.update(csrf(request))
+
+    try:
+        status = request.GET["q"]
+    except:
+        status = ""
+    return render(request, 'change_password.html', {
+        'form': args,
+        'status': status
+        })
+
+def ChangeEmail(request):
+    if not request.user:
+            return HttpResponseRedirect('/')
+            pass
+    else:
+        try:
+            user = User.objects.get(username=request.user)
+        except:
+            return HttpResponseRedirect('/')
+            pass
+
+    if request.POST:
+        try:
+            oldemail = request.POST['oldemail']
+        except:
+            oldemail = ""
+        try:
+            newemail1 = request.POST['newemail1']
+        except:
+            newemail1 = ""
+        try:
+            newemail2 = request.POST['newemail2']
+        except:
+            newemail2 = ""
+        if user.email == oldemail:
+            if not oldemail:
+                return HttpResponseRedirect('?q=3')
+            if not newemail1:
+                return HttpResponseRedirect('?q=4')
+            if not newemail2:
+                return HttpResponseRedirect('?q=4')
+            if newemail1 == newemail2:
+                user.email = newemail1
+                user.save()
+                return HttpResponseRedirect('?q=5')
+            else:
+                return HttpResponseRedirect('?q=2')
+        else:
+            return HttpResponseRedirect('?q=1')
+
+    args = {}
+    args.update(csrf(request))
+
+    try:
+        status = request.GET["q"]
+    except:
+        status = ""
+    return render(request, 'change_email.html', {
+        'form': args,
+        'status': status
+        })
+

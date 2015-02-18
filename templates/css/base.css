@@ -215,9 +215,12 @@ a:-webkit-any-link {
     margin: 10px 30px 30px 0;
     position: fixed;
     right: 10px;
+    display: inline-flex;
 }
 .member-box .box {
     margin: 0 5px 0 5px;
+    cursor: pointer;
+
 }
 
 .member-box .username {
@@ -341,7 +344,7 @@ input[type="submit"]:active, button:active, .submit-button:active {
 }
 
 .register:before {
-    content: "\f0c0";
+    content: "\f234";
 }
 
 .remove:before {
@@ -412,10 +415,6 @@ input[type="submit"]:active, button:active, .submit-button:active {
     width: 1%;
 }
 
-.input-group-label:before {
-
-}
-
 .input-group input[type="text"], .input-group input[type="password"], .input-group input[type="email"] {
     border: 1px solid rgba(0, 0, 0, 0.31);
     line-height: 33px;
@@ -461,6 +460,89 @@ input[type="submit"]:active, button:active, .submit-button:active {
 
 .twitter-share-icon:hover {
     color: #55acee;
+}
+
+.settings-icon:before {
+    content: "\f013";
+}
+
+.member-box .box ul {
+    font-size: small;
+    position: absolute;
+    right: -30px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #4d90fe;
+    opacity: 0;
+    display: none;
+
+}
+
+.member-box .box ul li {
+    padding: 10px 8px 10px 8px;
+}
+
+.member-box .box ul li:before {
+    font-family: FontAwesome;
+    margin-right: 5px;
+}
+
+.member-box .box:hover ul, .member-box .box ul:hover {
+    display: block;
+    opacity: 1;
+    transition: 5s;
+
+
+}
+
+.member-box .box ul li:hover {
+    background-color: #274f8c;
+    cursor: pointer;
+}
+
+.page-back-icon:before {
+    position: absolute;
+    font-size: 30vw;
+    z-index: -1;
+    right: 0;
+    top:20px;
+    color: rgba(0, 0, 0, 0.05);
+}
+
+.check-icon:before {
+    content: '\f00c';
+}
+
+.exclamation-triangle-icon:before {
+    content: '\f071';
+}
+
+.paper-plane-o:before {
+    content: '\f1d9';
+}
+
+#search-ul {
+    font-size: small;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    width: 139px;
+    color: #ffffff;
+    background-color: #4d90fe;
+
+}
+
+#search-ul li {
+    padding: 5px 10px 5px 10px;
+    text-align: left;
+    margin: 0;
+}
+
+#search-ul li:hover {
+    background-color: #274f8c;
+    cursor: pointer;
 }
 
 

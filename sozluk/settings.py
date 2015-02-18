@@ -105,3 +105,13 @@ TEMPLATE_DIRS = (
 MEDIA_ROOT = '/home/bigent/django-sozluk'
 
 MEDIA_URL = '/media/'
+
+LOGIN_URL = '/giris/'
+LOGOUT_URL = '/cikis/'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'asd@gmail.com'
+EMAIL_HOST_PASSWORD = 'asd'
+DEFAULT_FROM_EMAIL = 'asd@gmail.com'

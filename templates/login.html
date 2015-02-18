@@ -1,6 +1,6 @@
 {% include 'base.html' %}
 <title>giriş - sözlük</title>
-<div class="anasayfa">
+<div class="anasayfa icon page-back-icon login">
     <h1 class="titles">kullanıcı giriş sayfası</h1>
     {% if status == "1" %}
         <p style="color: red">şifrenizi boş bırakamazsınız efendism</p>
@@ -8,6 +8,8 @@
         <p style="color: red">şifrenizi yanlış girdiniz efendism</p>
     {% elif status == "3" %}
         <p style="color: red">kullanıcı adı ve şifrenizi boş bırakamazsınız efendism</p>
+    {% elif status == "4" %}
+        <p style="color: red">böyle bir hesap bulamadık efendism</p>
     {% endif %}
     <form action="auth" method="post">
         {% csrf_token %}
@@ -22,5 +24,8 @@
         <input type="checkbox" id="remember_me" name="_remember_me"/>
         <label for="remember_me"><small>beni hatırla</small></label>
         <p><input class="submit-button" type="submit" value="giriş yap"/></p>
+        <p style="font-size: small" class="icon password-icon">
+            <a href="/account/password_reset/">şifremi unuttum?</a>
+        </p>
     </form>
 </div>

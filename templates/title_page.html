@@ -75,7 +75,7 @@
                                 {{ entry.count_up_votes }}
                             </div>&nbsp;
                             <a target="popup" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}','name','width=600,height=450')" class="icon facebook-share-icon" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" title="facebook'ta paylaş"></a>&nbsp;
-                            <a target="popup" onclick="window.open('https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text=sözlük - {{ title }}&via={{ entry.author }}','name','width=600,height=450')" class="icon twitter-share-icon" href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text=sözlük - {{ title }}&via={{ entry.author }}" target="_blank" title="twitter'da paylaş"></a>
+                            <a target="popup" onclick="window.open('https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text=sözlük - {{ entry.title }}&via={{ entry.author }}','name','width=600,height=450')" class="icon twitter-share-icon" href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text=sözlük - {{ entry.title }}&via={{ entry.author }}" target="_blank" title="twitter'da paylaş"></a>
                         </div>
                     </small>
                     <div class="right">

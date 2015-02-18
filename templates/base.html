@@ -4,7 +4,9 @@
     <div class="logo"><a href="/"><h1>örneksözlük</h1></a></div>
     <div class="search-box" align="center">
         <form action="/arama" method="get">
-            <input name="q" type="text" placeholder="...başlık">
+            <input id="search-input" name="q" type="text" placeholder="...başlık" autocomplete="off">
+            <ul id="search-ul">
+            </ul>
         </form>
     </div>
     <div class="member-box">
@@ -12,10 +14,19 @@
             <a href="/kullanici/{{ user }}" title="profil sayfanız efendism">
                 <div class="username">{{ user }}</div>
             </a>
-            <a class="box icon logout" href="/cikis"><small>çıkış</small></a>
+            <div class="box icon logout">
+                <a href="/account/logout"><small>çıkış</small></a>
+            </div>
+            <div class="box icon settings-icon">
+                <small>ayarlar</small>
+                <ul>
+                    <a href="/account/password_change"><li class="password-icon">şifre değiştir</li></a>
+                    <a href="/account/email_change"><li class="email-icon">e-mail değiştir</li></a>
+                </ul>
+            </div>
         {% else %}
-            <a class="box icon login" href="/giris"><small>giriş yap</small></a>
-            <a class="box icon register" href="/kayit"><small>kayıt ol</small></a>
+            <a class="box icon login" href="/account/login"><small>giriş yap</small></a>
+            <a class="box icon register" href="/account/register"><small>kayıt ol</small></a>
         {% endif %}
     </div>
 </div>
@@ -32,7 +43,6 @@
 </div>
 
 <script>
-
     $(".feed-ul li").click(function () {
        var id = $(this).attr('id');
        var li = $(this);
@@ -76,6 +86,10 @@
                                     $('#frames #popular').append(wrapper);
                                 })
                     });
+
+           if($('#frames #popular').text() == ""){
+                $('#frames #popular').text("ajanlarımız herhangi bir entry bulamadı efendism.")
+            }
                }
             });
 
@@ -109,9 +123,33 @@
 
                             $('#frames #popular').append(wrapper);
                         })
+
             });
 
+    if($('#frames #popular').text() == ""){
+        $('#frames #popular').text("ajanlarımız herhangi bir entry bulamadı efendism.")
+    }
 
+    $('#search-input').bind('input', function() {
+        var value = $(this).val();
+
+        $.post('/ajax/search', {
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            value: value
+        },
+                function(data) {
+                    $('#search-ul').html(data)
+                }
+        )
+    });
+
+    $('#search-ul, #search-input').mouseleave(function(){
+        $('#search-ul').css('display', 'none');
+    });
+
+    $('#search-ul, #search-input').mouseenter(function(){
+        $('#search-ul').css('display', 'block');
+    });
 
 
 </script>
