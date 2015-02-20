@@ -5,7 +5,7 @@
 <img src="http://i.hizliresim.com/rg3yd3.png"></img>
 <img src="http://i.hizliresim.com/7oqQ8N.png"></img>
 
-<a href="http://bigent.pythonanywhere.com/"><h2>DEMO</h2></a>
+<a href="http://bigent.pythonanywhere.com/">DEMO</a>
 
 <h2>Turkish(information)</h2>
 <p>Sözlük, herhangi bir kişinin herhangi bir konuda fikrini beyan etmesini sağladığı bir topluluktur. Bu sözlükler herhangi bir konuda hakkında açılabilir. <i>Bu proje <strong>ekşisözlük vb.</strong> websitelerinden <strong>esinlenerek</strong> yapılmıştır.</i></p>
